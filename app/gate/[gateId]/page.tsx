@@ -8,6 +8,9 @@ import { useGates } from "@/hooks/useGates";
 import LiveClock from "@/components/LiveClock";
 import { getWebSocket } from "@/lib/ws-client";
 import { GateAnimation } from "@/components/GateAnimation";
+import { useQueryClient } from "@tanstack/react-query";
+import { useStore } from "@/store/store";
+import SubscriptionForm from "@/components/SubscriptionForm";
 
 export default function page({
   params,
@@ -15,6 +18,8 @@ export default function page({
   params: Promise<{ gateId: string }>;
 }) {
   const { gateId } = use(params);
+  const queryClient = useQueryClient();
+  const subscriptionVerfied = useStore((state) => state.subscriptionVerfied);
   const {
     Zones,
     isLoading: isLoadingZones,
@@ -41,10 +46,22 @@ export default function page({
     socket.onopen = () => {
       setWsConnected(true);
       socket.send(
-        JSON.stringify({ type: "subscribe", payload: { gateId: "gate_1" } })
+        JSON.stringify({ type: "subscribe", payload: { gateId: gateId } })
       );
     };
-    socket.onmessage = (event) => console.log("Gate msg:", event.data);
+    socket.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+      if (message.type === "zone-update") {
+        const updatedZone = message.payload;
+        // Update the specific zone in the React Query cache
+        queryClient.setQueryData(["Zones", gateId], (oldData: Zone[]) => {
+          if (!oldData) return oldData;
+          return oldData.map((zone: Zone) =>
+            zone.id === updatedZone.id ? updatedZone : zone
+          );
+        });
+      }
+    };
   }, []);
 
   if (isLoadingGates || isLoadingZones) {
@@ -135,11 +152,15 @@ export default function page({
         </TabsContent>
 
         <TabsContent value="subscriber" className="mt-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {Zones.map((zone) => (
-              <ZoneCard key={zone.id} zone={zone} gateId={gateId} />
-            ))}
-          </div>
+          {subscriptionVerfied ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {Zones.map((zone) => (
+                <ZoneCard key={zone.id} zone={zone} gateId={gateId} />
+              ))}
+            </div>
+          ) : (
+            <SubscriptionForm />
+          )}
         </TabsContent>
       </Tabs>
       <GateAnimation

@@ -7,13 +7,8 @@ type props = {
   subscriptionId?: string;
 };
 
-export default function useTicketCheckIn({
-  gateId,
-  zoneId,
-  type = "visitor",
-  subscriptionId,
-}: props) {
-  const { data, mutate, isPending } = useMutation({
+export default function useTicketCheckIn() {
+  const { data, mutateAsync, isPending, error, isError } = useMutation({
     mutationKey: ["checkInTicket"],
     mutationFn: async ({ gateId, zoneId, type, subscriptionId }: props) => {
       const response = await fetch(
@@ -24,11 +19,15 @@ export default function useTicketCheckIn({
           headers: { "Content-Type": "application/json" },
         }
       );
-
+      if (!response.ok) {
+        throw new Error(
+          (await response.json()).message || "Error checking in ticket"
+        );
+      }
       const data = await response.json();
 
       return data;
     },
   });
-  return { data, mutate, isPending };
+  return { data, mutateAsync, isPending, error, isError };
 }

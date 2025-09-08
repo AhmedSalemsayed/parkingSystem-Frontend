@@ -18,6 +18,7 @@ export function useZones(gateId: string): {
       const data = await response.json();
       return data;
     },
+    refetchOnWindowFocus: false,
   });
 
   return { isLoading, Zones, error };

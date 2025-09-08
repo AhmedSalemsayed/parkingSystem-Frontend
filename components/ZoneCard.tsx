@@ -22,7 +22,7 @@ export default function ZoneCard({
   showTicketModal: boolean;
   setShowTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const { mutate, data, isPending } = useTicketCheckIn({
+  const { mutateAsync, data, isPending, error, isError } = useTicketCheckIn({
     gateId,
     zoneId: zone.id,
     type,
@@ -102,9 +102,11 @@ export default function ZoneCard({
             isPending && "bg-slate-950 "
           }`}
           disabled={!zone.open || isPending}
-          onClick={(e) => {
-            handleEnterParking(e);
-            mutate({ gateId, zoneId: zone.id, type });
+          onClick={async (e) => {
+            await mutateAsync({ gateId, zoneId: zone.id, type });
+            if (!isError) {
+              handleEnterParking(e);
+            }
           }}
         >
           {isPending ? (
@@ -116,14 +118,18 @@ export default function ZoneCard({
             </>
           )}
         </Button>
-
+        {isError && (
+          <p className="text-sm text-red-600 text-center">{error?.message}</p>
+        )}
+      </CardContent>
+      {data && (
         <ParkingTicketModal
           data={data}
           gate={gate}
           open={showTicketModal}
           setIsOpen={setShowTicketModal}
         />
-      </CardContent>
+      )}
     </Card>
   );
 }
