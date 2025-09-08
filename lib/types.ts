@@ -1,3 +1,9 @@
+type Gate = {
+  id: string;
+  name: string;
+  zoneIds: string[];
+  location: string;
+};
 type Zone = {
   id: string;
   name: string;
@@ -13,9 +19,16 @@ type Zone = {
   rateSpecial: number;
   open: boolean;
 };
-type Gate = {
+
+type Ticket = {
   id: string;
-  name: string;
-  zoneIds: string[];
-  location: string;
+  type: string;
+  zoneId: string;
+  gateId: string;
+  checkinAt: string;
+  checkoutAt: string | null;
+};
+type TicketCheckInResponse = {
+  ticket: Ticket;
+  zoneState: Zone;
 };

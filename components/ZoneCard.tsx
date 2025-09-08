@@ -1,8 +1,32 @@
+"use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { DollarSign } from "lucide-react";
-export default function ZoneCard({ zone }: { zone: Zone }) {
+import { ArrowRight } from "lucide-react";
+import useTicketCheckIn from "@/hooks/useTicketCheckIn";
+import { ParkingTicketModal } from "./parkingTicketModal";
+export default function ZoneCard({
+  zone,
+  gate,
+  gateId,
+  type,
+  handleEnterParking,
+  showTicketModal,
+  setShowTicketModal,
+}: {
+  zone: Zone;
+  gate: Gate;
+  gateId: string;
+  type: "visitor" | "subscriber";
+  handleEnterParking: React.MouseEventHandler<HTMLButtonElement>;
+  showTicketModal: boolean;
+  setShowTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  const { mutate, data, isPending } = useTicketCheckIn({
+    gateId,
+    zoneId: zone.id,
+    type,
+  });
   return (
     <Card
       className={`transition-all duration-200 hover:shadow-lg cursor-pointer border-primary/20 hover:border-primary/40 group ${
@@ -74,11 +98,31 @@ export default function ZoneCard({ zone }: { zone: Zone }) {
 
         {/* Select Button */}
         <Button
-          className="w-full  group-disabled:cursor-not-allowed"
-          disabled={!zone.open}
+          className={` w-full cursor-pointer  group-disabled:cursor-not-allowed ${
+            isPending && "bg-slate-950 "
+          }`}
+          disabled={!zone.open || isPending}
+          onClick={(e) => {
+            handleEnterParking(e);
+            mutate({ gateId, zoneId: zone.id, type });
+          }}
         >
-          Go
+          {isPending ? (
+            "Processing..."
+          ) : (
+            <>
+              Go
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
+            </>
+          )}
         </Button>
+
+        <ParkingTicketModal
+          data={data}
+          gate={gate}
+          open={showTicketModal}
+          setIsOpen={setShowTicketModal}
+        />
       </CardContent>
     </Card>
   );

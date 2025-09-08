@@ -1,12 +1,13 @@
 "use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Wifi, WifiOff, Clock, Users, Car, DollarSign } from "lucide-react";
+import { Wifi, WifiOff, Users, Car } from "lucide-react";
 import { useEffect, useState, use } from "react";
 import ZoneCard from "@/components/ZoneCard";
 import { useZones } from "@/hooks/useZones";
 import { useGates } from "@/hooks/useGates";
 import LiveClock from "@/components/LiveClock";
 import { getWebSocket } from "@/lib/ws-client";
+import { GateAnimation } from "@/components/GateAnimation";
 
 export default function page({
   params,
@@ -20,11 +21,20 @@ export default function page({
     error: ZonesError,
   } = useZones(gateId);
   const { Gates, isLoading: isLoadingGates, error: GatesError } = useGates();
-  const requiredGate = Gates?.find((gate) => gate.id === gateId);
+  const requiredGate = Gates?.find((gate) => gate.id === gateId)!;
   const [wsConnected, setWsConnected] = useState(false);
+  const [showGateAnimation, setShowGateAnimation] = useState(false);
+  const [showTicketModal, setShowTicketModal] = useState(false);
   const [activeTab, setActiveTab] = useState<"visitor" | "subscriber">(
     "visitor"
   );
+  const handleEnterParking = () => {
+    setShowGateAnimation(true);
+  };
+  const handleGateAnimationComplete = () => {
+    setShowGateAnimation(false);
+    setShowTicketModal(true);
+  };
 
   useEffect(() => {
     const socket = getWebSocket();
@@ -65,7 +75,7 @@ export default function page({
             {/* Connection Status */}
             <div className="flex items-center gap-2">
               {wsConnected ? (
-                <Wifi className="h-4 w-4 text-green-500" />
+                <Wifi className="h-4 w-4 text-green-500 " />
               ) : (
                 <WifiOff className="h-4 w-4 text-red-500" />
               )}
@@ -91,11 +101,17 @@ export default function page({
         className="mb-6"
       >
         <TabsList className="grid w-full grid-cols-2 max-w-md">
-          <TabsTrigger value="visitor" className="flex items-center gap-2">
+          <TabsTrigger
+            value="visitor"
+            className="flex items-center gap-2 cursor-pointer"
+          >
             <Users className="h-4 w-4" />
             Visitor
           </TabsTrigger>
-          <TabsTrigger value="subscriber" className="flex items-center gap-2">
+          <TabsTrigger
+            value="subscriber"
+            className="flex items-center gap-2 cursor-pointer"
+          >
             <Car className="h-4 w-4" />
             Subscriber
           </TabsTrigger>
@@ -104,7 +120,16 @@ export default function page({
         <TabsContent value="visitor" className="mt-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {Zones.map((zone) => (
-              <ZoneCard key={zone.id} zone={zone} />
+              <ZoneCard
+                key={zone.id}
+                zone={zone}
+                gate={requiredGate}
+                gateId={gateId}
+                type="visitor"
+                handleEnterParking={handleEnterParking}
+                showTicketModal={showTicketModal}
+                setShowTicketModal={setShowTicketModal}
+              />
             ))}
           </div>
         </TabsContent>
@@ -112,11 +137,15 @@ export default function page({
         <TabsContent value="subscriber" className="mt-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {Zones.map((zone) => (
-              <ZoneCard key={zone.id} zone={zone} />
+              <ZoneCard key={zone.id} zone={zone} gateId={gateId} />
             ))}
           </div>
         </TabsContent>
       </Tabs>
+      <GateAnimation
+        isVisible={showGateAnimation}
+        onComplete={handleGateAnimationComplete}
+      />
     </div>
   );
 }

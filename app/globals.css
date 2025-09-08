@@ -4,74 +4,75 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #374151;
-  --card: #f0fdf4;
-  --card-foreground: #374151;
-  --popover: #ffffff;
-  --popover-foreground: #374151;
-  --primary: #15803d;
-  --primary-foreground: #ffffff;
-  --secondary: #f0fdf4;
-  --secondary-foreground: #374151;
-  --muted: #f0fdf4;
-  --muted-foreground: #374151;
-  --accent: #84cc16;
-  --accent-foreground: #ffffff;
-  --destructive: #be123c;
-  --destructive-foreground: #ffffff;
-  --border: #e5e7eb;
-  --input: #f0fdf4;
-  --ring: rgba(20, 184, 166, 0.5);
-  --chart-1: #d97706;
-  --chart-2: #15803d;
-  --chart-3: #84cc16;
-  --chart-4: #be123c;
-  --chart-5: #f0fdf4;
-  --radius: 0.5rem;
-  --sidebar: #ffffff;
-  --sidebar-foreground: #374151;
-  --sidebar-primary: #15803d;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #84cc16;
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #e5e7eb;
-  --sidebar-ring: rgba(20, 184, 166, 0.5);
+  /* Updated color tokens to match parking ticket design brief */
+  --background: oklch(1 0 0); /* #ffffff */
+  --foreground: oklch(0.278 0.013 258.338); /* #374151 */
+  --card: oklch(0.984 0.024 142.495); /* #f0fdf4 */
+  --card-foreground: oklch(0.506 0.177 142.495); /* #15803d */
+  --popover: oklch(1 0 0); /* #ffffff */
+  --popover-foreground: oklch(0.278 0.013 258.338); /* #374151 */
+  --primary: oklch(0.506 0.177 142.495); /* #15803d */
+  --primary-foreground: oklch(1 0 0); /* #ffffff */
+  --secondary: oklch(0.748 0.204 78.748); /* #84cc16 */
+  --secondary-foreground: oklch(0.278 0.013 258.338); /* #374151 */
+  --muted: oklch(0.984 0.024 142.495); /* #f0fdf4 */
+  --muted-foreground: oklch(0.278 0.013 258.338); /* #374151 */
+  --accent: oklch(0.748 0.204 78.748); /* #84cc16 */
+  --accent-foreground: oklch(1 0 0); /* #ffffff */
+  --destructive: oklch(0.577 0.245 27.325); /* #dc2626 */
+  --destructive-foreground: oklch(1 0 0); /* #ffffff */
+  --border: oklch(0.831 0.007 286.067); /* #d1d5db */
+  --input: oklch(1 0 0); /* #ffffff */
+  --ring: oklch(0.748 0.204 78.748); /* #84cc16 */
+  --chart-1: oklch(0.506 0.177 142.495); /* #15803d */
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.5rem; /* Updated to match design brief */
+  --sidebar: oklch(0.984 0.024 142.495); /* #f0fdf4 */
+  --sidebar-foreground: oklch(0.278 0.013 258.338); /* #374151 */
+  --sidebar-primary: oklch(0.506 0.177 142.495); /* #15803d */
+  --sidebar-primary-foreground: oklch(1 0 0); /* #ffffff */
+  --sidebar-accent: oklch(0.748 0.204 78.748); /* #84cc16 */
+  --sidebar-accent-foreground: oklch(0.278 0.013 258.338); /* #374151 */
+  --sidebar-border: oklch(0.831 0.007 286.067); /* #d1d5db */
+  --sidebar-ring: oklch(0.748 0.204 78.748); /* #84cc16 */
 }
 
 .dark {
-  --background: #0f172a;
-  --foreground: #f8fafc;
-  --card: #1e293b;
-  --card-foreground: #f8fafc;
-  --popover: #0f172a;
-  --popover-foreground: #f8fafc;
-  --primary: #22c55e;
-  --primary-foreground: #0f172a;
-  --secondary: #1e293b;
-  --secondary-foreground: #f8fafc;
-  --muted: #1e293b;
-  --muted-foreground: #94a3b8;
-  --accent: #84cc16;
-  --accent-foreground: #0f172a;
-  --destructive: #ef4444;
-  --destructive-foreground: #f8fafc;
-  --border: #334155;
-  --input: #1e293b;
-  --ring: rgba(34, 197, 94, 0.5);
-  --chart-1: #f97316;
-  --chart-2: #22c55e;
-  --chart-3: #84cc16;
-  --chart-4: #ef4444;
-  --chart-5: #1e293b;
-  --sidebar: #0f172a;
-  --sidebar-foreground: #f8fafc;
-  --sidebar-primary: #22c55e;
-  --sidebar-primary-foreground: #0f172a;
-  --sidebar-accent: #84cc16;
-  --sidebar-accent-foreground: #0f172a;
-  --sidebar-border: #334155;
-  --sidebar-ring: rgba(34, 197, 94, 0.5);
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
 }
 
 @theme inline {
@@ -121,5 +122,122 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Enhanced print-specific styles for better ticket printing */
+@media print {
+  .print-hidden {
+    display: none !important;
+  }
+
+  .print-visible {
+    display: block !important;
+  }
+
+  /* ✅ Centering without flexbox duplication */
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center; /* horizontal center */
+  }
+
+  .parking-ticket {
+    box-shadow: none !important;
+    border: 3px solid #000 !important;
+    background: white !important;
+    color: black !important;
+    page-break-inside: avoid;
+    padding: 0 !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+
+    /* ✅ Center properly */
+    display: inline-block;
+    margin: auto;
+
+    /* ✅ Auto scaling to fit A5 */
+    max-width: calc(148mm - 12mm); /* A5 width minus page margins */
+    max-height: calc(210mm - 12mm); /* A5 height minus page margins */
+    width: auto !important;
+    height: auto !important;
+  }
+
+  @page {
+    margin: 6mm;
+    size: A5;
+  }
+
+  .parking-ticket *,
+  .parking-ticket h1,
+  .parking-ticket .text-card-foreground,
+  .parking-ticket .text-foreground,
+  .parking-ticket .text-muted-foreground {
+    color: #000 !important;
+    background: transparent !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .parking-ticket .text-3xl {
+    font-size: 2rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.1em !important;
+  }
+
+  .parking-ticket .text-2xl {
+    font-size: 1.5rem !important;
+    font-weight: 800 !important;
+  }
+
+  .parking-ticket .text-xl {
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+  }
+
+  .parking-ticket .text-lg {
+    font-size: 1.125rem !important;
+    font-weight: 600 !important;
+  }
+
+  .parking-ticket svg {
+    color: #000 !important;
+    fill: #000 !important;
+    stroke: #000 !important;
+  }
+
+  .parking-ticket .border-border {
+    border-color: #000 !important;
+    border-width: 1px !important;
+  }
+
+  [role="dialog"] {
+    position: static !important;
+    transform: none !important;
+    max-width: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  body > *:not([role="dialog"]) {
+    display: none !important;
+  }
+
+  .parking-ticket .space-y-6 > * + * {
+    margin-top: 1rem !important;
+  }
+
+  .parking-ticket .space-y-3 > * + * {
+    margin-top: 0.75rem !important;
+  }
+
+  .parking-ticket .space-y-2 > * + * {
+    margin-top: 0.5rem !important;
   }
 }
