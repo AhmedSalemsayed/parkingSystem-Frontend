@@ -5,11 +5,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import useTicketCheckIn from "@/hooks/useTicketCheckIn";
 import { ParkingTicketModal } from "./parkingTicketModal";
+import { useStore } from "@/store/store";
 export default function ZoneCard({
   zone,
   gate,
   gateId,
-  type,
   handleEnterParking,
   showTicketModal,
   setShowTicketModal,
@@ -17,20 +17,23 @@ export default function ZoneCard({
   zone: Zone;
   gate: Gate;
   gateId: string;
-  type: "visitor" | "subscriber";
   handleEnterParking: React.MouseEventHandler<HTMLButtonElement>;
   showTicketModal: boolean;
   setShowTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const { mutateAsync, data, isPending, error, isError } = useTicketCheckIn({
-    gateId,
-    zoneId: zone.id,
-    type,
-  });
+  const subscriptionId = useStore((state) => state.subscriptionId);
+  const { mutateAsync, data, isPending, error, isError } = useTicketCheckIn(
+    zone.id,
+    gateId
+  );
   return (
     <Card
       className={`transition-all duration-200 hover:shadow-lg cursor-pointer border-primary/20 hover:border-primary/40 group ${
-        zone.open ? "" : "opacity-60 cursor-not-allowed"
+        zone.open ? "" : "opacity-60 cursor-not-allowed "
+      }${
+        !subscriptionId &&
+        zone.availableForVisitors <= 0 &&
+        "opacity-60 cursor-not-allowed"
       }`}
     >
       <CardHeader className="pb-3">
@@ -101,9 +104,14 @@ export default function ZoneCard({
           className={` w-full cursor-pointer  group-disabled:cursor-not-allowed ${
             isPending && "bg-slate-950 "
           }`}
-          disabled={!zone.open || isPending}
+          disabled={!zone.open || isPending || zone.availableForVisitors <= 0}
           onClick={async (e) => {
-            await mutateAsync({ gateId, zoneId: zone.id, type });
+            await mutateAsync({
+              gateId,
+              zoneId: zone.id,
+              type: subscriptionId ? "subscriber" : "visitor",
+              subscriptionId: subscriptionId,
+            });
             if (!isError) {
               handleEnterParking(e);
             }

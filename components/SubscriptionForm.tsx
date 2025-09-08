@@ -14,7 +14,7 @@ import { useStore } from "@/store/store";
 import useSubscription from "@/hooks/useSubscription";
 
 export default function SubscriptionForm() {
-  const verifySubscription = useStore((state) => state.verifySubscription);
+  const setSubscriptionId = useStore((state) => state.setSubscriptionId);
   const { isPending, mutateAsync, error, isError } = useSubscription();
 
   const handleSubmit = async (event) => {
@@ -23,7 +23,7 @@ export default function SubscriptionForm() {
     const id = formData.get("subscriptionId") as string;
     await mutateAsync(id);
     if (!isError) {
-      verifySubscription();
+      setSubscriptionId(id);
     }
   };
   return (

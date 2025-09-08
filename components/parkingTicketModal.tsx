@@ -14,15 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Clock, MapPin, Ticket, Printer } from "lucide-react";
-
-interface ParkingTicketData {
-  id: string;
-  type: string;
-  zoneId: string;
-  gateId: string;
-  checkinAt: string;
-  checkoutAt: string | null;
-}
+import { useStore } from "@/store/store";
 
 export function ParkingTicketModal({
   data,
@@ -38,7 +30,7 @@ export function ParkingTicketModal({
   const handlePrint = () => {
     window.print();
   };
-
+  const subscriptionId = useStore((state) => state.subscriptionId);
   const formatDateTime = (dateString: string) => {
     const date = new Date(dateString);
     return {
@@ -87,7 +79,8 @@ export function ParkingTicketModal({
                 </span>
               </div>
               <div className="text-3xl font-bold text-card-foreground font-mono tracking-wider">
-                {data?.ticket.id}
+                {data?.ticket.id} /{" "}
+                {subscriptionId ? subscriptionId : "Visitor"}
               </div>
             </div>
 

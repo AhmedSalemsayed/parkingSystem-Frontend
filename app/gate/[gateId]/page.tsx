@@ -19,13 +19,9 @@ export default function page({
 }) {
   const { gateId } = use(params);
   const queryClient = useQueryClient();
-  const subscriptionVerfied = useStore((state) => state.subscriptionVerfied);
-  const {
-    Zones,
-    isLoading: isLoadingZones,
-    error: ZonesError,
-  } = useZones(gateId);
-  const { Gates, isLoading: isLoadingGates, error: GatesError } = useGates();
+  const subscriptionId = useStore((state) => state.subscriptionId);
+  const { Zones, isLoading: isLoadingZones } = useZones(gateId);
+  const { Gates, isLoading: isLoadingGates } = useGates();
   const requiredGate = Gates?.find((gate) => gate.id === gateId)!;
   const [wsConnected, setWsConnected] = useState(false);
   const [showGateAnimation, setShowGateAnimation] = useState(false);
@@ -134,28 +130,33 @@ export default function page({
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="visitor" className="mt-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {Zones.map((zone) => (
-              <ZoneCard
-                key={zone.id}
-                zone={zone}
-                gate={requiredGate}
-                gateId={gateId}
-                type="visitor"
-                handleEnterParking={handleEnterParking}
-                showTicketModal={showTicketModal}
-                setShowTicketModal={setShowTicketModal}
-              />
-            ))}
-          </div>
-        </TabsContent>
-
-        <TabsContent value="subscriber" className="mt-6">
-          {subscriptionVerfied ? (
+        <TabsContent value={activeTab} className="mt-6">
+          {activeTab === "visitor" ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {Zones.map((zone) => (
-                <ZoneCard key={zone.id} zone={zone} gateId={gateId} />
+                <ZoneCard
+                  key={zone.id}
+                  zone={zone}
+                  gate={requiredGate}
+                  gateId={gateId}
+                  handleEnterParking={handleEnterParking}
+                  showTicketModal={showTicketModal}
+                  setShowTicketModal={setShowTicketModal}
+                />
+              ))}
+            </div>
+          ) : subscriptionId ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {Zones.map((zone) => (
+                <ZoneCard
+                  key={zone.id}
+                  zone={zone}
+                  gate={requiredGate}
+                  gateId={gateId}
+                  handleEnterParking={handleEnterParking}
+                  showTicketModal={showTicketModal}
+                  setShowTicketModal={setShowTicketModal}
+                />
               ))}
             </div>
           ) : (

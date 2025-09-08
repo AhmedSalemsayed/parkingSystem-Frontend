@@ -1,13 +1,13 @@
 import { create } from "zustand";
 
 type Store = {
-  subscriptionVerfied: boolean;
-  verifySubscription: () => void;
+  subscriptionId: string | null;
+  setSubscriptionId: (id: string) => void;
 };
 
 export const useStore = create<Store>((set) => ({
-  subscriptionVerfied: false,
-  verifySubscription: () => {
-    set({ subscriptionVerfied: true });
+  subscriptionId: null,
+  setSubscriptionId: (id) => {
+    set({ subscriptionId: id });
   },
 }));
