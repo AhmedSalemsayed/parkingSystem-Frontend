@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.1",
     "@next/swc-wasm-nodejs": "^15.5.2",
     "@next/swc-wasm-web": "^15.5.2",
     "@radix-ui/react-dialog": "^1.1.15",
@@ -25,8 +26,10 @@
     "node": "^20.19.5",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-hook-form": "^7.62.0",
     "tailwind-merge": "^3.3.1",
     "wscat": "^6.1.0",
+    "zod": "^4.1.5",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
