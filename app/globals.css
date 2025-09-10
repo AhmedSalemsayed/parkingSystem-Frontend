@@ -6,24 +6,24 @@
 :root {
   /* Updated color tokens to match parking ticket design brief */
   --background: oklch(1 0 0); /* #ffffff */
-  --foreground: oklch(0.278 0.013 258.338); /* #374151 */
-  --card: oklch(0.984 0.024 142.495); /* #f0fdf4 */
-  --card-foreground: oklch(0.506 0.177 142.495); /* #15803d */
+  --foreground: oklch(0.556 0.014 258.338); /* #475569 */
+  --card: oklch(0.97 0.013 258.338); /* #f1f5f9 */
+  --card-foreground: oklch(0.556 0.014 258.338); /* #475569 */
   --popover: oklch(1 0 0); /* #ffffff */
   --popover-foreground: oklch(0.278 0.013 258.338); /* #374151 */
-  --primary: oklch(0.506 0.177 142.495); /* #15803d */
+  --primary: oklch(0.598 0.207 164.376); /* #059669 emerald-600 */
   --primary-foreground: oklch(1 0 0); /* #ffffff */
   --secondary: oklch(0.768 0.204 130.85); /* #84cc16 */
   --secondary-foreground: oklch(0.278 0.013 258.338); /* #374151 */
-  --muted: oklch(0.984 0.024 142.495); /* #f0fdf4 */
-  --muted-foreground: oklch(0.278 0.013 258.338); /* #374151 */
-  --accent: oklch(0.748 0.204 78.748); /* #84cc16 */
+  --muted: oklch(0.97 0.013 258.338); /* #f1f5f9 */
+  --muted-foreground: oklch(0.556 0.014 258.338); /* #475569 */
+  --accent: oklch(0.696 0.17 162.48); /* #10b981 emerald-500 */
   --accent-foreground: oklch(1 0 0); /* #ffffff */
   --destructive: oklch(0.577 0.245 27.325); /* #dc2626 */
   --destructive-foreground: oklch(1 0 0); /* #ffffff */
   --border: oklch(0.831 0.007 286.067); /* #d1d5db */
   --input: oklch(1 0 0); /* #ffffff */
-  --ring: oklch(0.748 0.204 78.748); /* #84cc16 */
+  --ring: oklch(0.598 0.207 164.376 / 0.5); /* emerald-600 with opacity */
   --chart-1: oklch(0.506 0.177 142.495); /* #15803d */
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.398 0.07 227.392);

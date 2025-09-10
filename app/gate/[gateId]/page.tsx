@@ -47,6 +47,7 @@ export default function page({
     };
     socket.onmessage = (event) => {
       const message = JSON.parse(event.data);
+      console.log(message.type);
       if (message.type === "zone-update") {
         const updatedZone = message.payload;
         // Update the specific zone in the React Query cache
@@ -160,7 +161,9 @@ export default function page({
               ))}
             </div>
           ) : (
-            <SubscriptionForm />
+            <div className="min-h-screen bg-background flex items-center justify-center p-4">
+              <SubscriptionForm />
+            </div>
           )}
         </TabsContent>
       </Tabs>

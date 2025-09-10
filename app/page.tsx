@@ -51,13 +51,15 @@ export default function LandingPage() {
               >
                 Pricing
               </a>
-              <Button
-                variant="outline"
-                size="sm"
-                className="font-open-sans bg-transparent"
-              >
-                Sign In
-              </Button>
+              <Link href="/login">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="font-open-sans bg-transparent"
+                >
+                  Sign In
+                </Button>
+              </Link>
               <Link href="/gate">
                 <Button size="sm" className="font-open-sans cursor-pointer">
                   Get Started

@@ -22,7 +22,7 @@ type Zone = {
 
 type Ticket = {
   id: string;
-  type: string;
+  type: "visitor" | "subscriber";
   zoneId: string;
   gateId: string;
   checkinAt: string;
@@ -52,4 +52,22 @@ type Subscription = {
   startsAt: string;
   expiresAt: string;
   currentCheckins: CheckIn[];
+};
+type BreakdownSegment = {
+  from: string;
+  to: string;
+  hours: number;
+  rateMode: string;
+  rate: number;
+  amount: number;
+};
+
+type CheckoutData = {
+  ticketId: string;
+  checkinAt: string;
+  checkoutAt: string;
+  durationHours: string;
+  breakdown: BreakdownSegment[];
+  amount: number;
+  zoneState: Zone;
 };

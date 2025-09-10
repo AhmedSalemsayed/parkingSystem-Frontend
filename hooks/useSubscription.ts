@@ -1,7 +1,21 @@
 import { useMutation } from "@tanstack/react-query";
 
-export default function useSubscription() {
-  const { isPending, mutateAsync, error, isError, reset } = useMutation({
+export default function useSubscription(): {
+  isPending: boolean;
+  getSubscription: (id: string) => Promise<Subscription>;
+  error: any;
+  isError: boolean;
+  reset: () => void;
+  subscriberData: Subscription;
+} {
+  const {
+    isPending,
+    mutateAsync: getSubscription,
+    error,
+    isError,
+    reset,
+    data: subscriberData,
+  } = useMutation({
     mutationKey: ["subscriptionVertifcation"],
     mutationFn: async (id: string) => {
       const response = await fetch(
@@ -17,5 +31,5 @@ export default function useSubscription() {
       setTimeout(() => reset(), 2000);
     },
   });
-  return { isPending, mutateAsync, error, isError, reset };
+  return { isPending, getSubscription, error, isError, reset, subscriberData };
 }

@@ -87,7 +87,7 @@ export default function ZoneCard({
             <span className="text-sm text-muted-foreground">Normal Rate:</span>
           </div>
           <div className="text-right">
-            <p className="font-semibold">${zone.rateNormal} / hour</p>
+            <p className="font-semibold">${zone.rateNormal} / min</p>
           </div>
         </div>
         <div className="flex items-center justify-between  ">
@@ -95,7 +95,7 @@ export default function ZoneCard({
             <span className="text-sm text-muted-foreground">Special Rate:</span>
           </div>
           <div className="text-right">
-            <p className="font-semibold">${zone.rateSpecial} / hour</p>
+            <p className="font-semibold">${zone.rateSpecial} / min</p>
           </div>
         </div>
 
