@@ -1,10 +1,13 @@
-type Gate = {
+import { LucideProps } from "lucide-react";
+import { ForwardRefExoticComponent, RefAttributes } from "react";
+
+export type Gate = {
   id: string;
   name: string;
   zoneIds: string[];
   location: string;
 };
-type Zone = {
+export type Zone = {
   id: string;
   name: string;
   categoryId: string;
@@ -20,7 +23,7 @@ type Zone = {
   open: boolean;
 };
 
-type Ticket = {
+export type Ticket = {
   id: string;
   type: "visitor" | "subscriber";
   zoneId: string;
@@ -28,22 +31,22 @@ type Ticket = {
   checkinAt: string;
   checkoutAt: string | null;
 };
-type TicketCheckInResponse = {
+export type TicketCheckInResponse = {
   ticket: Ticket;
   zoneState: Zone;
 };
-type Car = {
+export type Car = {
   plate: string;
   brand: string;
   model: string;
   color: string;
 };
-type CheckIn = {
+export type CheckIn = {
   ticketId: string;
   zoneId: string;
   checkinAt: string;
 };
-type Subscription = {
+export type Subscription = {
   id: string;
   userName: string;
   active: boolean;
@@ -53,7 +56,7 @@ type Subscription = {
   expiresAt: string;
   currentCheckins: CheckIn[];
 };
-type BreakdownSegment = {
+export type BreakdownSegment = {
   from: string;
   to: string;
   hours: number;
@@ -62,7 +65,7 @@ type BreakdownSegment = {
   amount: number;
 };
 
-type CheckoutData = {
+export type CheckoutData = {
   ticketId: string;
   checkinAt: string;
   checkoutAt: string;
@@ -70,4 +73,24 @@ type CheckoutData = {
   breakdown: BreakdownSegment[];
   amount: number;
   zoneState: Zone;
+};
+export type ParkingStateReport = {
+  zoneId: string;
+  name: string;
+  totalSlots: number;
+  occupied: number;
+  free: number;
+  reserved: number;
+  availableForVisitors: number;
+  availableForSubscribers: number;
+  subscriberCount: number;
+  open: boolean;
+}[];
+export type ActiveTab = "employees" | "reports" | "control";
+export type NavigationItem = {
+  id: ActiveTab;
+  name: string;
+  icon: ForwardRefExoticComponent<
+    Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
+  >;
 };
