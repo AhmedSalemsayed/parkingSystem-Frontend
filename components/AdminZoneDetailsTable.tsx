@@ -12,7 +12,7 @@ export default function AdminZoneDetailsTable() {
   if (!parkingStateReport) return;
   return (
     <Card>
-      <div className="p-6">
+      <div className="p-6 ">
         <h3 className="text-lg font-medium mb-4">Zone Details</h3>
         <div className="overflow-x-auto">
           <table className="w-full">
@@ -35,7 +35,7 @@ export default function AdminZoneDetailsTable() {
             </thead>
             <tbody>
               {parkingStateReport.map((zone) => (
-                <tr key={zone.zoneId} className="border-b hover:bg-muted/50">
+                <tr key={zone.zoneId} className="border-b  hover:bg-slate-200">
                   <td className="py-3 px-4">
                     <div className="flex items-center gap-2">
                       <MapPin className="h-4 w-4 text-muted-foreground" />
@@ -47,7 +47,7 @@ export default function AdminZoneDetailsTable() {
                       className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
                         zone.open
                           ? "bg-primary text-primary-foreground"
-                          : "bg-destructive text-white"
+                          : "bg-destructive text-white animate-pulse"
                       }`}
                     >
                       {zone.open ? "Open" : "Closed"}

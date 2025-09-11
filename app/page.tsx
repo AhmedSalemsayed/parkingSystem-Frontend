@@ -60,7 +60,7 @@ export default function LandingPage() {
                   Sign In
                 </Button>
               </Link>
-              <Link href="/gate">
+              <Link href="/gate/gate_1">
                 <Button size="sm" className="font-open-sans cursor-pointer">
                   Get Started
                 </Button>
@@ -89,7 +89,7 @@ export default function LandingPage() {
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/gate">
+                <Link href="/gate/gate_1">
                   <Button
                     size="lg"
                     className="font-open-sans font-semibold cursor-pointer group"

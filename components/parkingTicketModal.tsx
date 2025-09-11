@@ -15,6 +15,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Clock, MapPin, Ticket, Printer } from "lucide-react";
 import { useStore } from "@/store/store";
+import { Gate, TicketCheckInResponse } from "@/lib/types";
 
 export function ParkingTicketModal({
   data,

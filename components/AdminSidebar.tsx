@@ -10,7 +10,7 @@ export default function AdminSidebar() {
   const activeTab = useAdminStore((state) => state.activeTab);
   const setActiveTab = useAdminStore((state) => state.setActiveTab);
   return (
-    <aside className="flex min-h-screen">
+    <aside className="flex min-h-screen ">
       <div
         className={`
           fixed inset-y-0 left-0 z-50 w-64 transform bg-card border-r transition-transform duration-200 ease-in-out
@@ -27,7 +27,7 @@ export default function AdminSidebar() {
           <X className="h-5 w-5" />
         </Button>
         <div className="flex h-full flex-col pt-16 md:pt-0">
-          <nav className="flex-1 space-y-2 p-4">
+          <nav className="flex-1 space-y-2 p-4 ">
             {navigation.map((item) => {
               const Icon = item.icon;
               return (

@@ -11,6 +11,8 @@ import { GateAnimation } from "@/components/GateAnimation";
 import { useQueryClient } from "@tanstack/react-query";
 import { useStore } from "@/store/store";
 import SubscriptionForm from "@/components/SubscriptionForm";
+import { AdminUpdatePayload, Zone } from "@/lib/types";
+import { toast } from "sonner";
 
 export default function page({
   params,
@@ -39,6 +41,7 @@ export default function page({
 
   useEffect(() => {
     const socket = getWebSocket();
+    console.log(socket);
     socket.onopen = () => {
       setWsConnected(true);
       socket.send(
@@ -57,6 +60,14 @@ export default function page({
             zone.id === updatedZone.id ? updatedZone : zone
           );
         });
+      } else if (message.type === "admin-update") {
+        const data: AdminUpdatePayload = message.payload;
+        if (data.targetType === "zone") {
+          const zoneName = data.targetId.split("_").at(1)?.toUpperCase();
+          const state = data.action.split("-").at(1)?.toUpperCase();
+          const time = new Date(data.timestamp).toLocaleString();
+          toast.info(`Zone ${zoneName} ${state} at ${time}`);
+        }
       }
     };
   }, []);
@@ -87,9 +98,9 @@ export default function page({
 
           <div className="flex items-center gap-4">
             {/* Connection Status */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 animate-caret-blink">
               {wsConnected ? (
-                <Wifi className="h-4 w-4 text-green-500 " />
+                <Wifi className="h-4 w-4 text-green-500  " />
               ) : (
                 <WifiOff className="h-4 w-4 text-red-500" />
               )}

@@ -1,3 +1,4 @@
+import { Subscription } from "@/lib/types";
 import { useMutation } from "@tanstack/react-query";
 
 export default function useSubscription(): {

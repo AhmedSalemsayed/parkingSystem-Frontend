@@ -6,11 +6,18 @@ type AdminStore = {
   setSidebarOpen: () => void;
   activeTab: ActiveTab;
   setActiveTab: (activeTab: ActiveTab) => void;
+  auditLog: string[];
+  setAuditLog: (value: string) => void;
 };
 
 export const useAdminStore = create<AdminStore>((set) => ({
   sidebarOpen: true,
-  setSidebarOpen: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
+  auditLog: [],
   activeTab: "employees",
+  setSidebarOpen: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
   setActiveTab: (value) => set({ activeTab: value }),
+  setAuditLog: (value) =>
+    set((state) => ({
+      auditLog: [...state.auditLog, value],
+    })),
 }));

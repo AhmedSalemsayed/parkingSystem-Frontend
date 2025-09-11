@@ -22,7 +22,13 @@ export type Zone = {
   rateSpecial: number;
   open: boolean;
 };
-
+export type Category = {
+  id: string;
+  name: string;
+  rateNormal: number;
+  rateSpecial: number;
+  description?: string;
+};
 export type Ticket = {
   id: string;
   type: "visitor" | "subscriber";
@@ -93,4 +99,13 @@ export type NavigationItem = {
   icon: ForwardRefExoticComponent<
     Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
   >;
+};
+
+export type AdminUpdatePayload = {
+  adminId: string;
+  action: string;
+  targetType: string;
+  targetId: string;
+  details: any;
+  timestamp: string;
 };
