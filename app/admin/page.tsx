@@ -9,7 +9,7 @@ export default function page() {
   const activeTab = useAdminStore((state) => state.activeTab);
 
   return (
-    <section className="flex">
+    <section className="flex overflow-auto">
       <AdminSidebar />
       {activeTab === "employees" && <EmployeeScreen />}
       {activeTab === "reports" && <ParkingStateReport />}

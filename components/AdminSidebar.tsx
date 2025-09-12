@@ -14,14 +14,14 @@ export default function AdminSidebar() {
       <div
         className={`
           fixed inset-y-0 left-0 z-50 w-64 transform bg-card border-r transition-transform duration-200 ease-in-out
-          md:relative md:translate-x-0 md:z-0
+          lg:relative lg:translate-x-0 lg:z-0
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
         `}
       >
         <Button
           variant="ghost"
           size="sm"
-          className="md:hidden absolute right-0 top-1.5"
+          className="lg:hidden absolute right-0 top-1.5"
           onClick={() => setSidebarOpen()}
         >
           <X className="h-5 w-5" />
@@ -51,7 +51,7 @@ export default function AdminSidebar() {
       {/* Overlay for mobile */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/50 md:hidden"
+          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
           onClick={() => setSidebarOpen()}
         />
       )}

@@ -11,7 +11,7 @@ export default function AdminZoneDetailsTable() {
     .get('["ParkingStateReport"]')?.state?.data as ParkingStateReport;
   if (!parkingStateReport) return;
   return (
-    <Card>
+    <Card className="overflow-x-scroll">
       <div className="p-6 ">
         <h3 className="text-lg font-medium mb-4">Zone Details</h3>
         <div className="overflow-x-auto">

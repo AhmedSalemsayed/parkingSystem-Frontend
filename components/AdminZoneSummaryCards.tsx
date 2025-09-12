@@ -11,7 +11,7 @@ export default function AdminZoneSummaryCards() {
     .get('["ParkingStateReport"]')?.state?.data as ParkingStateReport;
   if (!parkingStateReport) return;
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4  ">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 overflow-x-hidden ">
       <Card className="p-4">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-primary/20 rounded-lg">

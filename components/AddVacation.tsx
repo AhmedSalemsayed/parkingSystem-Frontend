@@ -27,7 +27,7 @@ export default function AddVacation() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="text-base cursor-pointer">
+        <Button className="text-sm  md:text-base cursor-pointer ">
           <PlusCircle />
           Add Vacation
         </Button>

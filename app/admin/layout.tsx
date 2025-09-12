@@ -6,9 +6,9 @@ export default function layout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="min-h-screen bg-background">
+    <>
       <AdminHeader />
-      {children}
-    </main>
+      <main className="min-h-screen bg-background w-full">{children}</main>
+    </>
   );
 }

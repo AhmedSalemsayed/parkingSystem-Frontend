@@ -19,15 +19,23 @@ export default function AddRushHour() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const weekDay = formData.get("weekDay")!;
-    const from = formData.get("from")! as string;
-    const to = formData.get("to")! as string;
-    mutateAsync({ weekDay: +weekDay, from: from, to: to });
+    // Convert FormData → typed object
+    const object = {
+      weekDay: Number(formData.get("weekDay")), // convert from string
+      from: String(formData.get("from")),
+      to: String(formData.get("to")),
+    };
+
+    // const weekDay = formData.get("weekDay")!;
+    // const from = formData.get("from")! as string;
+    // const to = formData.get("to")! as string;
+    // mutateAsync({ weekDay: +weekDay, from: from, to: to });
+    mutateAsync(object);
   }
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="text-base cursor-pointer">
+        <Button className="text-sm md:text-base cursor-pointer">
           <PlusCircle />
           Add Rush Hour
         </Button>
